@@ -82,7 +82,8 @@ class _HeroCarouselState extends State<HeroCarousel> {
     final currentSlide = FarmData.heroSlides[_currentIndex];
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 900;
-    final heroHeight = isDesktop ? 480.0 : 420.0;
+    final isMobile = screenWidth < 600;
+    final heroHeight = isDesktop ? 480.0 : (isMobile ? 500.0 : 440.0);
 
     return Container(
       width: double.infinity,
@@ -264,17 +265,18 @@ class _HeroCarouselState extends State<HeroCarousel> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
-                    color: AppTheme.cardBg.withValues(alpha: 0.8),
-                    borderRadius: BorderRadius.circular(24),
+                    color: AppTheme.cardBg.withValues(alpha: 0.85),
+                    borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: AppTheme.gold.withValues(alpha: 0.4)),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 6,
+                    runSpacing: 4,
                     children: [
                       const Icon(Icons.auto_awesome, size: 14, color: AppTheme.gold),
-                      const SizedBox(width: 6),
                       Text(
-                        "Today's Special · ${currentSlide.specialDish} ",
+                        "Today's Special · ${currentSlide.specialDish}",
                         style: const TextStyle(
                           color: AppTheme.textPrimary,
                           fontSize: 12,

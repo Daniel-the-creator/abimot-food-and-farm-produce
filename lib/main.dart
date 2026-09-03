@@ -15,6 +15,7 @@ import 'widgets/product_card.dart';
 import 'widgets/flash_deal_widget.dart';
 import 'widgets/promo_banner.dart';
 import 'widgets/cart_drawer.dart';
+import 'widgets/wishlist_drawer.dart';
 import 'widgets/product_detail_modal.dart';
 import 'widgets/checkout_dialog.dart';
 import 'widgets/reviews_section.dart';
@@ -76,6 +77,21 @@ class _StorefrontScreenState extends State<StorefrontScreen> {
 
   void _openCartDrawer() {
     _scaffoldKey.currentState?.openEndDrawer();
+  }
+
+  void _openWishlistDrawer() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => FractionallySizedBox(
+        heightFactor: 0.85,
+        child: WishlistDrawer(
+          state: _state,
+          onOpenProductDetail: _showProductDetail,
+        ),
+      ),
+    );
   }
 
   void _openMobileNavDrawer() {
@@ -240,6 +256,17 @@ class _StorefrontScreenState extends State<StorefrontScreen> {
                   },
                 ),
                 ListTile(
+                  leading: const Icon(
+                    Icons.favorite_outline,
+                    color: AppTheme.saleRed,
+                  ),
+                  title: Text("Saved Wishlist (${_state.wishlistIds.length})"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _openWishlistDrawer();
+                  },
+                ),
+                ListTile(
                   leading: const Text("💬", style: TextStyle(fontSize: 18)),
                   title: const Text("WhatsApp Farm Support"),
                   onTap: () {
@@ -280,6 +307,7 @@ class _StorefrontScreenState extends State<StorefrontScreen> {
               StoreNavbar(
                 state: _state,
                 onOpenCart: _openCartDrawer,
+                onOpenWishlist: _openWishlistDrawer,
                 onOpenMenu: _openMobileNavDrawer,
                 onScrollToProduce: () => _scrollToKey(_produceKey),
                 onScrollToSpecials: () => _scrollToKey(_specialsKey),
@@ -635,9 +663,12 @@ class _StorefrontScreenState extends State<StorefrontScreen> {
     } else if (screenWidth >= 600) {
       crossAxisCount = 2;
       childAspectRatio = 0.72;
+    } else if (screenWidth >= 380) {
+      crossAxisCount = 2;
+      childAspectRatio = 0.61;
     } else {
       crossAxisCount = 2;
-      childAspectRatio = 0.58;
+      childAspectRatio = 0.54;
     }
 
     return GridView.builder(

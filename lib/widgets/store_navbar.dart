@@ -7,6 +7,7 @@ import '../data/farm_data.dart';
 class StoreNavbar extends StatelessWidget {
   final StoreState state;
   final VoidCallback onOpenCart;
+  final VoidCallback onOpenWishlist;
   final VoidCallback onOpenMenu;
   final VoidCallback onScrollToProduce;
   final VoidCallback onScrollToSpecials;
@@ -18,6 +19,7 @@ class StoreNavbar extends StatelessWidget {
     super.key,
     required this.state,
     required this.onOpenCart,
+    required this.onOpenWishlist,
     required this.onOpenMenu,
     required this.onScrollToProduce,
     required this.onScrollToSpecials,
@@ -163,19 +165,7 @@ class StoreNavbar extends StatelessWidget {
                     // Wishlist icon
                     IconButton(
                       tooltip: "Wishlist (${state.wishlistIds.length})",
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: AppTheme.cardBgElevated,
-                            content: Text(
-                              state.wishlistIds.isEmpty
-                                  ? "Your wishlist is empty. Tap the heart on any produce to save it!"
-                                  : "${state.wishlistIds.length} item(s) saved in your wishlist.",
-                              style: const TextStyle(color: AppTheme.textPrimary),
-                            ),
-                          ),
-                        );
-                      },
+                      onPressed: onOpenWishlist,
                       icon: Stack(
                         clipBehavior: Clip.none,
                         children: [

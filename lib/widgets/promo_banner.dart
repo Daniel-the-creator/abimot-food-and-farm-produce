@@ -17,47 +17,51 @@ class PromoBanner extends StatelessWidget {
       orElse: () => FarmData.products.last,
     );
 
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      height: 240,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppTheme.cardBorder),
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(
-        fit: StackFit.expand,
         children: [
           // Background photo
-          Image.network(
-            "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=1400&auto=format&fit=crop",
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, progress) =>
-                progress == null ? child : Container(color: AppTheme.cardBgElevated),
-            errorBuilder: (context, error, stackTrace) => Container(color: AppTheme.cardBgElevated),
+          Positioned.fill(
+            child: Image.network(
+              "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=1400&auto=format&fit=crop",
+              fit: BoxFit.cover,
+              loadingBuilder: (context, child, progress) =>
+                  progress == null ? child : Container(color: AppTheme.cardBgElevated),
+              errorBuilder: (context, error, stackTrace) => Container(color: AppTheme.cardBgElevated),
+            ),
           ),
 
           // Gradient overlay
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  Colors.black.withValues(alpha: 0.92),
-                  Colors.black.withValues(alpha: 0.75),
-                  Colors.black.withValues(alpha: 0.35),
-                ],
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withValues(alpha: 0.94),
+                    Colors.black.withValues(alpha: 0.82),
+                    Colors.black.withValues(alpha: 0.65),
+                  ],
+                ),
               ),
             ),
           ),
 
           // Content
           Padding(
-            padding: const EdgeInsets.all(28),
+            padding: EdgeInsets.all(isMobile ? 18.0 : 28.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -80,7 +84,7 @@ class PromoBanner extends StatelessWidget {
                 Text(
                   combo.name,
                   style: GoogleFonts.cormorantGaramond(
-                    fontSize: 26,
+                    fontSize: isMobile ? 22 : 26,
                     fontWeight: FontWeight.bold,
                     color: AppTheme.textPrimary,
                   ),
@@ -90,7 +94,7 @@ class PromoBanner extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 480),
                   child: const Text(
                     "1 Paint Egusi + 2L Pure Palm Oil + 1 Smoked Catfish Carton + 2 Ugu Bunches + 1 Bag Crayfish. Ready for authentic family delicacies.",
-                    maxLines: 2,
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 12.5,
@@ -100,26 +104,33 @@ class PromoBanner extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 14),
-                Row(
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 10,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    Text(
-                      "₦${combo.price.toStringAsFixed(0)}",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: AppTheme.gold,
-                      ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "₦${combo.price.toStringAsFixed(0)}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.gold,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          "₦${combo.originalPrice.toStringAsFixed(0)}",
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppTheme.textMuted,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      "₦${combo.originalPrice.toStringAsFixed(0)}",
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppTheme.textMuted,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
                     ElevatedButton(
                       onPressed: () {
                         state.addToCart(combo);

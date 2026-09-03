@@ -198,12 +198,15 @@ class ProductCard extends StatelessWidget {
                       ),
                       if (product.originalPrice > product.price) ...[
                         const SizedBox(width: 6),
-                        Text(
-                          "₦${product.originalPrice.toStringAsFixed(0)}",
-                          style: const TextStyle(
-                            fontSize: 11.5,
-                            color: AppTheme.textMuted,
-                            decoration: TextDecoration.lineThrough,
+                        Flexible(
+                          child: Text(
+                            "₦${product.originalPrice.toStringAsFixed(0)}",
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 11.5,
+                              color: AppTheme.textMuted,
+                              decoration: TextDecoration.lineThrough,
+                            ),
                           ),
                         ),
                       ],

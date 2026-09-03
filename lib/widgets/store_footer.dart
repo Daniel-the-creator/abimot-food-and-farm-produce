@@ -275,7 +275,7 @@ class StoreFooter extends StatelessWidget {
                     Icon(Icons.lock_outline, size: 12, color: AppTheme.emerald),
                     SizedBox(width: 4),
                     Text(
-                      "Bank Secured",
+                      "Secured",
                       style: TextStyle(
                         fontSize: 10.5,
                         color: AppTheme.textSecondary,
