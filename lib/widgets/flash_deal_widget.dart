@@ -256,8 +256,8 @@ class StoreHighlightsWidget extends StatelessWidget {
           const SizedBox(height: 14),
           _highlightItem("✓", "100% Unadulterated authentic produce"),
           _highlightItem("✓", "Safe, inspected payout & store identity"),
-          _highlightItem("✓", "1–2 business days dispatch nationwide"),
-          _highlightItem("✓", "Direct cold-chain delivery in Lagos"),
+          _highlightItem("✓", "1–2 business days dispatch in Ibadan and lagos"),
+          _highlightItem("✓", "Direct cold-chain delivery in Ibadan and Lagos"),
           const SizedBox(height: 14),
           SizedBox(
             width: double.infinity,
