@@ -31,7 +31,7 @@ class AbimotStoreApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Abimot Food and Farm Produce | Valerie',
+      title: 'Abimot Food and Farm Produce',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       home: const StorefrontScreen(),
