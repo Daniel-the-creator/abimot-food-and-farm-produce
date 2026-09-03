@@ -44,7 +44,9 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
       deliveryNotes: _notesController.text.trim(),
     );
 
-    final url = Uri.parse("https://wa.me/${FarmData.whatsappNumber}?text=$encodedMessage");
+    final url = Uri.parse(
+      "https://wa.me/${FarmData.whatsappNumber}?text=$encodedMessage",
+    );
 
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
@@ -93,7 +95,9 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
         constraints: const BoxConstraints(maxWidth: 460),
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: _isSubmitted ? _buildSuccessScreen() : _buildDeliveryFormScreen(),
+          child: _isSubmitted
+              ? _buildSuccessScreen()
+              : _buildDeliveryFormScreen(),
         ),
       ),
     );
@@ -137,16 +141,26 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
               decoration: BoxDecoration(
                 color: AppTheme.emeraldMuted,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppTheme.emerald.withValues(alpha: 0.3)),
+                border: Border.all(
+                  color: AppTheme.emerald.withValues(alpha: 0.3),
+                ),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, size: 16, color: AppTheme.emerald),
+                  const Icon(
+                    Icons.info_outline,
+                    size: 16,
+                    color: AppTheme.emerald,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       "Your order details will open directly in WhatsApp to finalize payment & delivery with Abimot (${FarmData.whatsappNumber}).",
-                      style: const TextStyle(fontSize: 11.5, color: AppTheme.emerald, fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                        fontSize: 11.5,
+                        color: AppTheme.emerald,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -180,7 +194,9 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
               label: "Full Name",
               hint: "e.g. Chioma Adeyemi",
               icon: Icons.person_outline,
-              validator: (v) => (v == null || v.trim().isEmpty) ? "Please enter your name" : null,
+              validator: (v) => (v == null || v.trim().isEmpty)
+                  ? "Please enter your name"
+                  : null,
             ),
             const SizedBox(height: 12),
 
@@ -188,7 +204,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             _buildInputField(
               controller: _phoneController,
               label: "Phone Number (11 digits)",
-              hint: "e.g. 08036671429",
+              hint: "e.g. 08039066202",
               icon: Icons.phone_outlined,
               keyboardType: TextInputType.number,
               inputFormatters: [
@@ -214,7 +230,9 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
               hint: "e.g. Bodija Market Area, Ibadan",
               icon: Icons.location_on_outlined,
               maxLines: 2,
-              validator: (v) => (v == null || v.trim().isEmpty) ? "Please enter your delivery address" : null,
+              validator: (v) => (v == null || v.trim().isEmpty)
+                  ? "Please enter your delivery address"
+                  : null,
             ),
             const SizedBox(height: 12),
 
@@ -239,8 +257,13 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF25D366),
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  textStyle: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -258,8 +281,13 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppTheme.textPrimary,
                   side: const BorderSide(color: AppTheme.cardBorder),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
@@ -281,7 +309,11 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             color: AppTheme.emeraldMuted,
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.check_circle, size: 40, color: AppTheme.emerald),
+          child: const Icon(
+            Icons.check_circle,
+            size: 40,
+            color: AppTheme.emerald,
+          ),
         ),
         const SizedBox(height: 16),
         const Text(
@@ -296,7 +328,11 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
         Text(
           "Your itemized cart has been prepared and sent to Abimot on WhatsApp (${FarmData.whatsappNumber}). The farm team will confirm payment and arrange delivery with you immediately.",
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary, height: 1.4),
+          style: const TextStyle(
+            fontSize: 13,
+            color: AppTheme.textSecondary,
+            height: 1.4,
+          ),
         ),
         const SizedBox(height: 24),
         SizedBox(
@@ -306,9 +342,14 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.gold,
               foregroundColor: Colors.black,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
-            child: const Text("Return to Store", style: TextStyle(fontWeight: FontWeight.bold)),
+            child: const Text(
+              "Return to Store",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ],
@@ -330,7 +371,11 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: AppTheme.textSecondary),
+          style: const TextStyle(
+            fontSize: 11.5,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.textSecondary,
+          ),
         ),
         const SizedBox(height: 5),
         TextFormField(
@@ -346,7 +391,10 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             prefixIcon: Icon(icon, size: 17, color: AppTheme.textMuted),
             filled: true,
             fillColor: AppTheme.cardBgElevated,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 10,
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: AppTheme.cardBorder),

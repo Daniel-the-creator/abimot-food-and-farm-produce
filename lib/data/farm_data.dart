@@ -26,7 +26,7 @@ class FarmData {
   static const String storeTagline =
       "Your Cravings for Fresh Organic Harvest, Farm Direct, All in One Place.";
   static const String storeDomain = "abimot.com";
-  static const String whatsappNumber = "2348036671429";
+  static const String whatsappNumber = "2348117613436";
 
   static const List<HeroSlideData> heroSlides = [
     HeroSlideData(
@@ -88,7 +88,7 @@ class FarmData {
   static const List<Product> products = [
     Product(
       id: "prod-plantain-01",
-      name: "dozen of plantain",
+      name: "plantain",
       category: "Fresh Farm Produce",
       brand: "ikire Farms",
       price: 16500,

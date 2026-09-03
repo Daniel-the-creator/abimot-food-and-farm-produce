@@ -8,7 +8,7 @@ class TrustStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
       decoration: BoxDecoration(
         color: AppTheme.cardBg,
         borderRadius: BorderRadius.circular(16),
@@ -17,34 +17,55 @@ class TrustStrip extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final isWide = constraints.maxWidth >= 720;
-          
+
           if (isWide) {
             return const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _TrustItem(icon: "🥬", label: "Fresh Daily", desc: "Harvested fresh from soil"),
-                _TrustItem(icon: "🛵", label: "Fast Delivery", desc: "Same-day doorstep delivery"),
-                _TrustItem(icon: "📦", label: "Bulk & Retail", desc: "Packs, cartons & sacks"),
-                _TrustItem(icon: "💬", label: "Direct Payment", desc: "Order & pay via WhatsApp"),
+                Expanded(
+                  child: _TrustItem(
+                    icon: "🥬",
+                    label: "Fresh Daily",
+                    desc: "Harvested fresh from soil",
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: _TrustItem(
+                    icon: "🛵",
+                    label: "Fast Delivery",
+                    desc: "Doorstep delivery across Ibadan",
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: _TrustItem(
+                    icon: "📦",
+                    label: "Bulk & Retail",
+                    desc: "Packs, cartons & wholesale sacks",
+                  ),
+                ),
               ],
             );
           } else {
             return const Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(child: _TrustItem(icon: "🥬", label: "Fresh Daily", desc: "Harvested fresh from soil")),
-                    SizedBox(width: 8),
-                    Expanded(child: _TrustItem(icon: "🛵", label: "Fast Delivery", desc: "Same-day doorstep delivery")),
-                  ],
+                _TrustItem(
+                  icon: "🥬",
+                  label: "Fresh Daily",
+                  desc: "Harvested fresh from soil",
                 ),
                 SizedBox(height: 12),
-                Row(
-                  children: [
-                    Expanded(child: _TrustItem(icon: "📦", label: "Bulk & Retail", desc: "Packs, cartons & sacks")),
-                    SizedBox(width: 8),
-                    Expanded(child: _TrustItem(icon: "🔒", label: "Secure Payment", desc: "Wavy & Transfer protection")),
-                  ],
+                _TrustItem(
+                  icon: "🛵",
+                  label: "Fast Delivery",
+                  desc: "Doorstep delivery across Ibadan & beyond",
+                ),
+                SizedBox(height: 12),
+                _TrustItem(
+                  icon: "📦",
+                  label: "Bulk & Retail",
+                  desc: "Packs, cartons & wholesale sacks",
                 ),
               ],
             );
@@ -69,11 +90,10 @@ class _TrustItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 36,
-          height: 36,
+          width: 38,
+          height: 38,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: AppTheme.cardBgElevated,
@@ -82,28 +102,32 @@ class _TrustItem extends StatelessWidget {
           ),
           child: Text(icon, style: const TextStyle(fontSize: 18)),
         ),
-        const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 12.5,
-                fontWeight: FontWeight.bold,
-                color: AppTheme.textPrimary,
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.textPrimary,
+                ),
               ),
-            ),
-            const SizedBox(height: 1),
-            Text(
-              desc,
-              style: const TextStyle(
-                fontSize: 11,
-                color: AppTheme.textMuted,
+              const SizedBox(height: 2),
+              Text(
+                desc,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: AppTheme.textMuted,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
